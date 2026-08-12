@@ -61,91 +61,79 @@
     border:1px solid rgba(159,220,245,.3);touch-action:none;cursor:pointer;
     -webkit-user-select:none;user-select:none}
   .pad button.on{background:rgba(159,220,245,.35);color:#fff}
-  /* ---- the manager's office ---- */
-  #office{position:fixed;inset:0;display:none;z-index:4;flex-direction:column;
+  /* ---- title + leaderboard screens ---- */
+  .screen{position:fixed;inset:0;display:none;z-index:4;flex-direction:column;
+    align-items:center;justify-content:center;padding:28px 22px;
     background:
-      linear-gradient(rgba(16,22,16,.22), rgba(16,22,16,.22)),
+      linear-gradient(rgba(16,22,16,.28), rgba(16,22,16,.28)),
       repeating-linear-gradient(90deg, #2E5D42 0 20px, #2A543C 20px 24px),
       #2E5D42;
-    overflow:hidden}
-  #office.show{display:flex}
-  .of-head{padding:calc(env(safe-area-inset-top,0) + 14px) 18px 6px;color:var(--hud)}
-  .of-head .eyebrow{display:block;font-size:10px;letter-spacing:.22em;color:#9AA7B0;
-    text-transform:uppercase;font-weight:600}
-  .of-head .name{font-size:17px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-  .of-wall{flex:1;position:relative;padding:8px 16px 0;display:flex;flex-direction:column;
-    gap:12px;min-height:0}
-  .of-window{position:relative;border:10px solid #E3C231;border-radius:4px;
-    background:#0C0F11;box-shadow:0 6px 18px rgba(0,0,0,.45), inset 0 0 0 2px #171B1F;
-    height:34%;min-height:150px}
-  .of-window canvas{width:100%;height:100%;display:block}
-  .of-window .of-label{position:absolute;left:8px;bottom:6px;font-size:9px;
-    letter-spacing:.2em;color:#8FA0AA;text-transform:uppercase;font-weight:700}
-  .of-row{display:flex;gap:12px;flex:1;min-height:0}
-  .of-cal{background:#F2EFE8;border-radius:3px;padding:10px 12px;flex:1;
-    box-shadow:0 5px 14px rgba(0,0,0,.4);color:#333A40;align-self:flex-start}
-  .of-cal .m{font-size:11px;font-weight:800;letter-spacing:.24em;text-align:center;
-    color:#2F6B45;margin-bottom:6px}
-  .of-cal table{width:100%;border-collapse:collapse;font-size:9px;
+    overflow:hidden;text-align:center}
+  .screen.show{display:flex}
+  .ti-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+    font-weight:700;color:#A9C2B1}
+  .ti-name{margin:10px 0 0;font-size:clamp(38px,13vw,68px);line-height:.92;
+    font-weight:900;letter-spacing:-.02em;text-transform:uppercase;color:#F4F7F4;
+    text-shadow:0 4px 0 rgba(0,0,0,.28)}
+  .ti-name span{display:block;color:#E3C231}
+  .ti-rule{width:76px;height:4px;background:#E3C231;border-radius:2px;margin:18px 0 0}
+  .ti-best{margin-top:16px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    font-weight:700;color:#CFE0D5;font-variant-numeric:tabular-nums;min-height:14px}
+  .btn-stack{margin-top:26px;display:flex;flex-direction:column;gap:12px;
+    width:min(300px,84vw)}
+  .big-btn{padding:17px 24px;font:inherit;font-size:14px;font-weight:800;
+    letter-spacing:.18em;text-transform:uppercase;color:#16301F;background:#E3C231;
+    border:none;border-radius:5px;cursor:pointer;box-shadow:0 5px 0 #A98B18;
+    transform:translateY(-3px)}
+  .big-btn:active{transform:translateY(0);box-shadow:0 1px 0 #A98B18}
+  .ghost-btn{padding:14px 24px;font:inherit;font-size:12px;font-weight:800;
+    letter-spacing:.18em;text-transform:uppercase;color:#EAF1EC;background:none;
+    border:1px solid rgba(234,241,236,.4);border-radius:5px;cursor:pointer}
+  .ti-hint{margin-top:24px;font-size:11px;line-height:1.5;color:#A9C2B1;
+    max-width:300px}
+  .bd-title{font-size:13px;letter-spacing:.24em;text-transform:uppercase;
+    font-weight:800;color:#E3C231}
+  .bd-list{list-style:none;margin:18px 0 0;padding:14px 16px;width:min(340px,88vw);
+    background:rgba(10,16,12,.4);border-radius:6px;
+    display:flex;flex-direction:column;gap:2px}
+  .bd-row{display:flex;align-items:baseline;gap:10px;padding:7px 4px;
+    font-size:13px;color:#EAF1EC;border-bottom:1px solid rgba(234,241,236,.09)}
+  .bd-row:last-child{border-bottom:none}
+  .bd-row .rk{width:22px;text-align:right;font-weight:800;color:#8FB39B;
     font-variant-numeric:tabular-nums}
-  .of-cal td{text-align:center;padding:2px 0;color:#5A6268}
-  .of-cal td.today{background:#2F6B45;color:#F2EFE8;border-radius:2px;font-weight:800}
-  .of-cal .shift{margin-top:7px;font-size:9px;font-weight:800;letter-spacing:.12em;
-    text-transform:uppercase;color:#333A40;border-top:1px solid #D8D2C4;padding-top:6px;
-    text-align:center}
-  .of-cork{background:#7A5A38;border:6px solid #5C432A;border-radius:3px;flex:1;
-    padding:10px;display:flex;flex-direction:column;gap:8px;align-self:flex-start;
-    box-shadow:0 5px 14px rgba(0,0,0,.4)}
-  .of-note{background:#F6E9A8;color:#4A4430;font-size:9.5px;font-weight:600;
-    padding:7px 8px;transform:rotate(-2deg);box-shadow:0 2px 5px rgba(0,0,0,.3);
-    line-height:1.35}
-  .of-note:nth-child(2){transform:rotate(1.5deg);background:#BFE3F2;color:#2E4450}
-  .of-sticks{position:absolute;right:6px;bottom:-6px;width:90px;height:150px;
-    pointer-events:none}
-  .of-stick{position:absolute;bottom:0;width:7px;height:140px;border-radius:3px;
-    background:linear-gradient(#C89B5E, #A97E45);transform-origin:bottom center}
-  .of-stick::after{content:'';position:absolute;bottom:-4px;left:-2px;width:26px;
-    height:10px;border-radius:2px 6px 2px 2px;background:#1A1D20}
-  .of-stick.s1{left:26px;transform:rotate(9deg)}
-  .of-stick.s2{left:44px;transform:rotate(-6deg);background:linear-gradient(#3E71B8,#2B5490)}
-  .of-stick.s2::after{background:#E8E4DC}
-  .of-puck{position:absolute;right:56px;bottom:2px;width:20px;height:8px;
-    border-radius:50%/40%;background:#14171A;box-shadow:0 2px 3px rgba(0,0,0,.5)}
-  .of-desk{position:relative;height:23%;min-height:120px;
-    background:
-      linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,0) 30%),
-      repeating-linear-gradient(90deg, #6B4A2F 0 90px, #61432B 90px 180px), #6B4A2F;
-    border-top:8px solid #4E3620;display:flex;align-items:center;justify-content:center}
-  .of-mug{position:absolute;left:9%;top:24px;width:26px;height:22px;border-radius:3px 3px 5px 5px;
-    background:#B33A3A}
-  .of-mug::after{content:'';position:absolute;right:-9px;top:4px;width:10px;height:11px;
-    border:3px solid #B33A3A;border-left:none;border-radius:0 6px 6px 0}
-  .of-papers{position:absolute;right:8%;top:20px;width:56px;height:36px;background:#EDE9DF;
-    transform:rotate(4deg);box-shadow:0 2px 5px rgba(0,0,0,.35)}
-  .of-papers::after{content:'';position:absolute;inset:6px 8px;
-    background:repeating-linear-gradient(#0000 0 5px, #C9C2B2 5px 6px)}
-  #clockIn{padding:16px 30px;font:inherit;font-size:13px;font-weight:800;
-    letter-spacing:.18em;text-transform:uppercase;color:#F2EFE8;background:#2F6B45;
-    border:none;border-radius:4px;cursor:pointer;box-shadow:0 5px 0 #1F4A2F;
-    transform:translateY(-4px)}
-  #clockIn:active{transform:translateY(0);box-shadow:0 1px 0 #1F4A2F}
+  .bd-row .nm{flex:1;text-align:left;font-weight:700;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .bd-row .tm{font-variant-numeric:tabular-nums;font-weight:800;color:#E3C231}
+  .bd-row.fresh{background:rgba(227,194,49,.16);border-radius:3px}
+  .bd-empty{padding:16px 4px;font-size:12px;color:#A9C2B1}
   #done{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
     background:rgba(10,13,15,.72);backdrop-filter:blur(3px);z-index:5}
   #done.show{display:flex}
-  .card{text-align:center;color:var(--hud);padding:34px 44px;border:1px solid rgba(159,220,245,.25);
+  .card{text-align:center;color:var(--hud);padding:32px clamp(24px,7vw,44px);
+    border:1px solid rgba(159,220,245,.25);width:min(360px,88vw);
     background:var(--arena-2);border-radius:4px}
-  .card .big{font-size:30px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--glow)}
+  .card .big{font-size:clamp(24px,7vw,30px);font-weight:800;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--glow)}
   .card .sub{margin-top:8px;font-size:13px;color:var(--hud-muted);font-variant-numeric:tabular-nums}
   .card button{margin-top:22px;padding:12px 28px;font:inherit;font-size:12px;font-weight:700;
     letter-spacing:.18em;text-transform:uppercase;color:var(--arena);background:var(--glow);
     border:none;border-radius:3px;cursor:pointer}
+  .name-row{display:none;margin-top:20px;flex-direction:column;gap:10px}
+  .name-row.show{display:flex}
+  .name-row label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    font-weight:700;color:#E3C231}
+  .name-row input{padding:13px 14px;font:inherit;font-size:16px;font-weight:700;
+    text-align:center;color:var(--hud);background:rgba(255,255,255,.07);
+    border:1px solid rgba(159,220,245,.3);border-radius:4px;outline:none}
+  .name-row input:focus{border-color:#E3C231}
+  .name-row button{margin-top:0;background:#E3C231;color:#16301F}
 </style>
 
 <canvas id="stage"></canvas>
 
 <div class="hud top">
   <div class="wordmark">
-    <span class="eyebrow">Prototype 01 — Steering Feel</span>
+    <span class="eyebrow">Morning flood</span>
     <span class="name">Rink Manager</span>
   </div>
   <div class="meter">
@@ -178,44 +166,36 @@
   </div>
 </div>
 
-<div id="office">
-  <div class="of-head">
-    <span class="eyebrow">Manager's office</span>
-    <span class="name">Municipal Arena &mdash; est. 1968</span>
+<div id="title" class="screen">
+  <div class="ti-eyebrow">Est. 1968</div>
+  <h1 class="ti-name">Rink<span>Manager</span></h1>
+  <div class="ti-rule"></div>
+  <div class="ti-best" id="tiBest"></div>
+  <div class="btn-stack">
+    <button id="startBtn" class="big-btn">Start shift</button>
+    <button id="boardBtn" class="ghost-btn">Leaderboard</button>
   </div>
-  <div class="of-wall">
-    <div class="of-window">
-      <canvas id="ofView"></canvas>
-      <div class="of-label">The sheet — live</div>
-    </div>
-    <div class="of-row">
-      <div class="of-cal">
-        <div class="m" id="calMonth"></div>
-        <table id="calGrid"></table>
-        <div class="shift">6:00 AM — Morning flood</div>
-      </div>
-      <div class="of-cork">
-        <div class="of-note">Light over the far blue line is flickering again</div>
-        <div class="of-note">Beer league Thursday — leave the nets out</div>
-      </div>
-    </div>
-    <div class="of-sticks">
-      <div class="of-stick s1"></div>
-      <div class="of-stick s2"></div>
-      <div class="of-puck"></div>
-    </div>
-  </div>
-  <div class="of-desk">
-    <div class="of-mug"></div>
-    <div class="of-papers"></div>
-    <button id="clockIn">Clock in</button>
+  <div class="ti-hint">Flood the whole sheet, then bring her home through the corner doors. Fastest clean sheet wins.</div>
+</div>
+
+<div id="board" class="screen">
+  <div class="bd-title">Fastest clean sheets</div>
+  <ol class="bd-list" id="bdList"></ol>
+  <div class="btn-stack">
+    <button id="bdBack" class="big-btn">Back</button>
   </div>
 </div>
 
 <div id="done"><div class="card">
   <div class="big">Clean Sheet</div>
   <div class="sub" id="doneSub"></div>
-  <button id="again">Back to the office</button>
+  <div class="name-row" id="nameRow">
+    <label for="nameIn">Top ten &mdash; put your name on it</label>
+    <input id="nameIn" maxlength="14" placeholder="Your name" autocomplete="off"
+           autocapitalize="words" spellcheck="false">
+    <button id="saveScore">Save</button>
+  </div>
+  <button id="again">Done</button>
 </div></div>
 
 <script>
@@ -239,8 +219,10 @@ const hintEl = document.getElementById('hint');
 const doneEl = document.getElementById('done');
 const doneSub = document.getElementById('doneSub');
 const sndBtn = document.getElementById('snd');
-const officeEl = document.getElementById('office');
-const ofView = document.getElementById('ofView');
+const titleEl = document.getElementById('title');
+const boardEl = document.getElementById('board');
+const nameRow = document.getElementById('nameRow');
+const nameIn = document.getElementById('nameIn');
 
 let fitScale = 4, dpr = 1;
 const cam = { x: RW/2, y: RL/2, z: 4 };
@@ -416,7 +398,8 @@ const pauseBtn = document.getElementById('pause');
 function startShift(){
   if(needFreshDay) prepareDay();
   running = true;
-  officeEl.classList.remove('show');
+  titleEl.classList.remove('show');
+  boardEl.classList.remove('show');
   document.body.classList.add('playing');
 }
 
@@ -437,49 +420,59 @@ document.getElementById('quitShift').addEventListener('click', () => {
   paused = false; running = false; needFreshDay = true;
   pausedEl.style.display = 'none';
   document.body.classList.remove('playing');
-  showOffice();
+  if(AC && audioOn) AC.resume();
+  showTitle();
 });
 
-function showOffice(){
-  officeEl.classList.add('show');
-  renderOfficeWindow();
-}
+// ---- leaderboard, kept on this device ----
+const BOARD_KEY = 'rinkManagerBoard.v1';
+const BOARD_MAX = 10;
 
-function renderOfficeWindow(){
-  // the window overlooks the actual sheet, rotated to landscape
-  const r = ofView.getBoundingClientRect();
-  const d2 = Math.min(2, window.devicePixelRatio || 1);
-  ofView.width = r.width * d2; ofView.height = r.height * d2;
-  const c = ofView.getContext('2d');
-  c.fillStyle = '#0C0F11'; c.fillRect(0, 0, ofView.width, ofView.height);
-  const s = Math.min(ofView.width/RL, ofView.height/RW) * .94;
-  c.translate(ofView.width/2, ofView.height/2);
-  c.rotate(-Math.PI/2);
-  c.scale(s, s);
-  c.translate(-RW/2, -RL/2);
-  c.fillStyle = '#1A1F22'; c.fillRect(-4, -4, RW+8, RL+8);
-  if(iceImg) c.drawImage(iceImg, 0, 0, RW, RL);
-  else c.drawImage(iceC, 0, 0, RW, RL);
-  c.drawImage(wetC, 0, 0, RW, RL);
-  c.drawImage(dirtC, 0, 0, RW, RL);
-  roundedRinkPath(c, RW, RL, CORNER);
-  c.strokeStyle = '#F4F6F7'; c.lineWidth = 1.6; c.stroke();
+function loadBoard(){
+  try{
+    const raw = JSON.parse(localStorage.getItem(BOARD_KEY) || '[]');
+    if(!Array.isArray(raw)) return [];
+    return raw.filter(r => r && typeof r.name === 'string' && isFinite(r.time))
+              .sort((a,b) => a.time - b.time).slice(0, BOARD_MAX);
+  }catch(e){ return []; }
 }
-
-function buildCalendar(){
-  const now = new Date();
-  const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY',
-                  'AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
-  document.getElementById('calMonth').textContent = months[now.getMonth()];
-  const first = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
-  const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
-  let html = '<tr>', cell = 0;
-  for(let i=0; i<first; i++){ html += '<td></td>'; cell++; }
-  for(let d=1; d<=days; d++){
-    html += `<td${d === now.getDate() ? ' class="today"' : ''}>${d}</td>`;
-    if(++cell % 7 === 0) html += '</tr><tr>';
+function saveBoard(rows){
+  try{ localStorage.setItem(BOARD_KEY, JSON.stringify(rows)); }catch(e){}
+}
+function fmtTime(sec){
+  const m = Math.floor(sec/60), s = Math.floor(sec%60);
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+function qualifies(sec){
+  const rows = loadBoard();
+  return rows.length < BOARD_MAX || sec < rows[rows.length-1].time;
+}
+function renderBoard(highlight){
+  const rows = loadBoard();
+  const list = document.getElementById('bdList');
+  if(!rows.length){
+    list.innerHTML = '<li class="bd-empty">No clean sheets yet. Go cut one.</li>';
+    return;
   }
-  document.getElementById('calGrid').innerHTML = html + '</tr>';
+  list.innerHTML = rows.map((r, i) => {
+    const fresh = highlight && r.name === highlight.name && r.time === highlight.time;
+    const name = r.name.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+    return `<li class="bd-row${fresh ? ' fresh' : ''}">` +
+           `<span class="rk">${i+1}</span><span class="nm">${name}</span>` +
+           `<span class="tm">${fmtTime(r.time)}</span></li>`;
+  }).join('');
+}
+function showTitle(){
+  const rows = loadBoard();
+  document.getElementById('tiBest').textContent =
+    rows.length ? `Best flood — ${fmtTime(rows[0].time)} by ${rows[0].name}` : '';
+  boardEl.classList.remove('show');
+  titleEl.classList.add('show');
+}
+function showBoard(highlight){
+  renderBoard(highlight);
+  titleEl.classList.remove('show');
+  boardEl.classList.add('show');
 }
 
 function rearPoint(){
@@ -575,14 +568,7 @@ function update(dt){
   if(started) elapsed += dt;
   // through the doors and gone = shift over
   if(started && zx > DCX && zy > DCY && bayRad(zx, zy) > CORNER + 8){
-    running = false; needFreshDay = true;
-    document.body.classList.remove('playing');
-    const m = Math.floor(elapsed/60), s2 = Math.floor(elapsed%60);
-    const t = `${m}:${String(s2).padStart(2,'0')}`;
-    doneEl.querySelector('.big').textContent = phase === 'home' ? 'Clean Sheet' : 'Left Early';
-    doneSub.textContent = phase === 'home'
-      ? `Full coverage — ${t}` : `Left the sheet at ${coverage.toFixed(0)}% — ${t}`;
-    doneEl.classList.add('show');
+    endShift(phase === 'home', elapsed, coverage);
     return;
   }
   // heavy wheel
@@ -855,7 +841,8 @@ function render(){
 // ---- input: one-thumb arc steering + throttle ----
 let anchorX = null, anchorY = null, lastTap = 0;
 addEventListener('pointerdown', e => {
-  if(doneEl.classList.contains('show') || officeEl.classList.contains('show') || paused) return;
+  if(doneEl.classList.contains('show') || titleEl.classList.contains('show')
+     || boardEl.classList.contains('show') || paused) return;
   if(!AC && audioOn) initAudio();
   if(AC && AC.state === 'suspended') AC.resume();
   const t = performance.now();
@@ -903,18 +890,68 @@ function bindPad(id, key){
 }
 bindPad('padL','l'); bindPad('padR','r'); bindPad('padU','u'); bindPad('padD','d');
 
+let pendingTime = null;
+
+function endShift(clean, secs, cov){
+  running = false; needFreshDay = true;
+  document.body.classList.remove('playing');
+  const t = fmtTime(secs);
+  doneEl.querySelector('.big').textContent = clean ? 'Clean Sheet' : 'Left Early';
+  doneSub.textContent = clean
+    ? `Full coverage — ${t}` : `Left the sheet at ${cov.toFixed(0)}% — ${t}`;
+  pendingTime = clean ? secs : null;
+  if(clean && qualifies(secs)){
+    nameRow.classList.add('show');
+    nameIn.value = localStorage.getItem('rinkManagerLastName') || '';
+  } else {
+    nameRow.classList.remove('show');
+  }
+  doneEl.classList.add('show');
+}
+
+function commitScore(){
+  if(pendingTime === null) return null;
+  const name = (nameIn.value || '').trim().slice(0, 14) || 'Rink rat';
+  const entry = { name, time: pendingTime };
+  const rows = loadBoard();
+  rows.push(entry);
+  rows.sort((a,b) => a.time - b.time);
+  saveBoard(rows.slice(0, BOARD_MAX));
+  try{ localStorage.setItem('rinkManagerLastName', name); }catch(e){}
+  pendingTime = null;
+  nameRow.classList.remove('show');
+  return entry;
+}
+
+document.getElementById('saveScore').addEventListener('click', () => {
+  const entry = commitScore();
+  doneEl.classList.remove('show');
+  showBoard(entry);
+});
+nameIn.addEventListener('keydown', e => {
+  if(e.key === 'Enter') document.getElementById('saveScore').click();
+});
 document.getElementById('again').addEventListener('click', () => {
   doneEl.classList.remove('show');
-  showOffice();
+  nameRow.classList.remove('show');
+  pendingTime = null;
+  showTitle();
 });
-document.getElementById('clockIn').addEventListener('click', () => {
+document.getElementById('startBtn').addEventListener('click', () => {
   if(!AC && audioOn) initAudio();
   if(AC && AC.state === 'suspended') AC.resume();
   startShift();
 });
+document.getElementById('boardBtn').addEventListener('click', () => showBoard());
+document.getElementById('bdBack').addEventListener('click', showTitle);
+
+window.__endShift = endShift;   // dev seam: exercise the finish card without a full flood
 window.__dbg = () => ({zx, zy, speed, speedTarget, heading, steer, started, running, phase,
                        cov: coverage, ice: !!iceImg, dirt: !!dirtImg,
-                       office: officeEl.classList.contains('show'),
+                       title: titleEl.classList.contains('show'),
+                       board: boardEl.classList.contains('show'),
+                       nameOpen: nameRow.classList.contains('show'),
+                       rows: loadBoard(),
                        cam: {...cam}, fitScale, dpr,
                        vw: innerWidth, vh: innerHeight,
                        sw: stage.width, sh: stage.height});
@@ -926,11 +963,6 @@ function step(now){
   const [vw, vh] = viewportSize();
   const wantW = Math.floor(vw * dpr), wantH = Math.floor(vh * dpr);
   if(Math.abs(stage.width - wantW) > 2 || Math.abs(stage.height - wantH) > 2) fit();
-  // office window can also boot blind — repaint it once it has real size
-  if(officeEl.classList.contains('show') && ofView.width < 4){
-    const r = ofView.getBoundingClientRect();
-    if(r.width > 4) renderOfficeWindow();
-  }
   const dt = Math.min(0.05, (now-last)/1000); last = now;
   update(dt);
   const m = Math.floor(elapsed/60), s = Math.floor(elapsed%60);
@@ -940,7 +972,7 @@ function step(now){
 function frame(now){ step(now); requestAnimationFrame(frame); }
 Promise.all([loadImg(ICE_SRC), loadImg(DIRT_SRC)]).then(([a, b]) => {
   iceImg = a; dirtImg = b;
-  fit(); prepareDay(); buildCalendar(); showOffice();
+  fit(); prepareDay(); showTitle();
   requestAnimationFrame(frame);
   // keep the sim ticking where requestAnimationFrame is suspended (occluded tabs)
   setInterval(() => {
